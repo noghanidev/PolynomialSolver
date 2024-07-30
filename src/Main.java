@@ -5,6 +5,5 @@ public class Main {
         Scanner input = new Scanner(System.in);
         String userInput = input.nextLine();
         PolynomialCredibilityChecker checker = new PolynomialCredibilityChecker(userInput);
-g
     }
 }
