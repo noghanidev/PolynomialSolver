@@ -1,30 +1,44 @@
 public class PolynomialCredibilityChecker {
-    private String userInput;
-    private int[] numList;
+    private final String userInput;
+    private final char[] acceptableCharacters;
 
     PolynomialCredibilityChecker(String userInput)
     {
         this.userInput = userInput;
-        numList = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        acceptableCharacters = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'x', '^', '+', '-', ' '};
 
     }
 
     public boolean credibleOrNot()
     {
         boolean credibleOrNot = true;
-
-        int numOfPlusAndMinus = 1;  //number of repititions
         for(int i = 0; i < userInput.length(); i++)
         {
-            if(userInput.charAt(i) == '+' || userInput.charAt(i) == '-')
+            if(userInput.charAt(i) == 'x')
             {
-                numOfPlusAndMinus++;
+                if(userInput.charAt(i + 1) != '^' && userInput.charAt(i + 1) != ' ')
+                {
+                    return false;
+                }
             }
-        }
 
-        for(int i = 0; i < numOfPlusAndMinus; i++)
-        {
+            for(int j = 0; j < acceptableCharacters.length; j++)
+            {
+                if(userInput.charAt(i) != acceptableCharacters[j])
+                {
+                    credibleOrNot = false;
+                }
 
+                else
+                {
+                    credibleOrNot = true;
+                    break;
+                }
+            }
+            if(!credibleOrNot)
+            {
+                return credibleOrNot;
+            }
         }
         return credibleOrNot;
     }
