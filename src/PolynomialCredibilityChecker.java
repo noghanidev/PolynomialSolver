@@ -14,7 +14,7 @@ public class PolynomialCredibilityChecker {
         boolean credibleOrNot = true;
         for(int i = 0; i < userInput.length(); i++)
         {
-            if(userInput.charAt(i) == 'x')
+            if(userInput.charAt(i) == 'x' && i != userInput.length() - 1)
             {
                 if(userInput.charAt(i + 1) != '^' && userInput.charAt(i + 1) != ' ')
                 {
@@ -22,9 +22,17 @@ public class PolynomialCredibilityChecker {
                 }
             }
 
-            for(int j = 0; j < acceptableCharacters.length; j++)
+            if(userInput.charAt(i) == '+' || userInput.charAt(i) == '-')
             {
-                if(userInput.charAt(i) != acceptableCharacters[j])
+                if(userInput.charAt(i - 1) != ' ' || userInput.charAt(i + 1) != ' ')
+                {
+                    return false;
+                }
+            }
+
+            for (char acceptableCharacter : acceptableCharacters)
+            {
+                if (userInput.charAt(i) != acceptableCharacter)
                 {
                     credibleOrNot = false;
                 }
