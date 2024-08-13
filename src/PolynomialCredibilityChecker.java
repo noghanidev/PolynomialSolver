@@ -5,7 +5,7 @@ public class PolynomialCredibilityChecker {
     PolynomialCredibilityChecker(String userInput)
     {
         this.userInput = userInput;
-        acceptableCharacters = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'x', '^', '+', '-', ' '};
+        acceptableCharacters = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'x', '^', '+', '-', ' ', '.'};
 
     }
 
@@ -28,6 +28,23 @@ public class PolynomialCredibilityChecker {
                 {
                     return false;
                 }
+            }
+
+            if(userInput.charAt(i) == '.')
+            {
+                boolean isThereANumberAfterTheDecimal = false;
+                if(userInput.charAt(userInput.length() - 1) == '.')
+                    return false;
+                for(int j = 0; j < 10; j++)
+                {
+                    if(i != userInput.length() - 1 &&userInput.charAt(i + 1) == acceptableCharacters[j])
+                    {
+                        isThereANumberAfterTheDecimal = true;
+                        break;
+                    }
+                }
+                if(!isThereANumberAfterTheDecimal)
+                    return false;
             }
 
             for (char acceptableCharacter : acceptableCharacters)
